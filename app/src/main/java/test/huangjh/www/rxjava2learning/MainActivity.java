@@ -1,5 +1,6 @@
 package test.huangjh.www.rxjava2learning;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClick(View v) {
         switch (v.getId()) {
             case R.id.textView2:
-
+                startActivity(new Intent(this, BaseUseActivity.class));
                 break;
             case R.id.textView3:
 
