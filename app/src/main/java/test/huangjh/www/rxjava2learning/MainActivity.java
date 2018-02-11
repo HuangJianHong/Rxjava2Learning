@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, BaseUseActivity.class));
                 break;
             case R.id.textView3:
-
+                startActivity(new Intent(this, ThreadChangeActivity.class));
                 break;
             case R.id.textView4:
 
