@@ -17,6 +17,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import test.huangjh.www.rxjava2learning.api.Api;
+import test.huangjh.www.rxjava2learning.api.RetrofitProvider;
 
 public class ObjectChangeActivity extends AppCompatActivity {
 
@@ -95,11 +97,38 @@ public class ObjectChangeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //登录和 注册的链式调用
-
-
-
-
+        //登录和 注册的链式调用  举例
+        final Api api = RetrofitProvider.get().create(Api.class);
+        /*api.register(new RegisterRequest())                      //发起注册请求
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<RegisterResponse>() {     //在subscribe之前
+                    @Override
+                    public void accept(RegisterResponse registerResponse) throws Exception {
+                        //先根据注册的响应结果去做一些操作
+                    }
+                })
+                .observeOn(Schedulers.io())              //回到IO线程去发起登录请求
+                .flatMap(new Function<RegisterResponse, ObservableSource<LoginResponse>>() {
+                    @Override
+                    public ObservableSource<LoginResponse> apply(RegisterResponse registerResponse) throws Exception {
+                        //registerResponse, 注册的响应结果
+                        return api.login(new LoginRequest());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())   //回到主线程去处理请求登录的结果
+                .subscribe(new Consumer<LoginResponse>() {
+                    @Override
+                    public void accept(LoginResponse loginResponse) throws Exception {
+                        //登录成功
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        //登录失败
+                    }
+                });
+*/
 
     }
 }
