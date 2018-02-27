@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ObjectChangeActivity.class));
                 break;
             case R.id.textView5:
-
+                startActivity(new Intent(this, ZipActivity.class));
                 break;
             case R.id.textView6:
 

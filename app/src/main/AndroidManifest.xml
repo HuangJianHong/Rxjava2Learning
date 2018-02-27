@@ -19,6 +19,7 @@
         <activity android:name=".BaseUseActivity" />
         <activity android:name=".ThreadChangeActivity" />
         <activity android:name=".ObjectChangeActivity" />
+        <activity android:name=".ZipActivity" />
     </application>
 
 </manifest>
