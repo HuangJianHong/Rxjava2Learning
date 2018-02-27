@@ -19,6 +19,8 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
+import test.huangjh.www.rxjava2learning.api.Api;
+import test.huangjh.www.rxjava2learning.api.RetrofitProvider;
 
 public class ZipActivity extends AppCompatActivity {
 
@@ -123,6 +125,35 @@ public class ZipActivity extends AppCompatActivity {
                     }
                 });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final Api api = RetrofitProvider.get().create(Api.class);
+        //zip操作符， 组合操作结果在发送
+        /*Observable<UserBaseInfoResponse> observable1 = api.getUserBaseInfo(new UserBaseInfoRequest())
+                .subscribeOn(Schedulers.io());
+
+        Observable<UserExtraInfoResponse> observable2 = api.getUserExtraInfo(new UserExtraInfoRequest())
+                .subscribeOn(Schedulers.io());
+
+        Observable.zip(observable1, observable2,
+                new BiFunction<UserBaseInfoResponse, UserExtraInfoResponse, UserInfo>() {
+                    @Override
+                    public UserInfo apply(UserBaseInfoResponse userBaseInfoResponse,
+                                          UserExtraInfoResponse userExtraInfoResponse) throws Exception {
+                        return new UserInfo(userBaseInfoResponse, userExtraInfoResponse);
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UserInfo>() {
+                    @Override
+                    public void accept(UserInfo userInfo) throws Exception {
+                        //do something
+                    }
+                });
+*/
 
     }
 }
