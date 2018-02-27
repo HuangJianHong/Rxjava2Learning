@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".BaseUseActivity" />
-        <activity android:name=".ThreadChangeActivity"></activity>
+        <activity android:name=".ThreadChangeActivity" />
+        <activity android:name=".ObjectChangeActivity" />
     </application>
 
 </manifest>
