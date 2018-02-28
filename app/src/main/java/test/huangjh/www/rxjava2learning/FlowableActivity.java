@@ -88,7 +88,7 @@ public class FlowableActivity extends AppCompatActivity {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.tvRequest:
-                mSubscription.request(1);
+                start();
                 break;
 
             default:
