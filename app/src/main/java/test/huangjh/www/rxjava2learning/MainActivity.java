@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.textView5:
                 startActivity(new Intent(this, ZipActivity.class));
-                Toast.makeText(this, "OpenActivity",  Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "OpenActivity", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.textView6:
-
+                startActivity(new Intent(this, FlowableActivity.class));
                 break;
             case R.id.textView7:
 
