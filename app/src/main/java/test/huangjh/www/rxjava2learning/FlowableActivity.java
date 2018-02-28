@@ -37,7 +37,7 @@ public class FlowableActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        Flowable flowable = Flowable.create(new FlowableOnSubscribe<Integer>() {
+        Flowable<Integer> flowable = Flowable.create(new FlowableOnSubscribe<Integer>() {
             @Override
             public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
                 Log.d(TAG, "emit 1");
