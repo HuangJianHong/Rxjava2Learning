@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.io.InterruptedIOException;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +20,6 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
-import test.huangjh.www.rxjava2learning.api.Api;
-import test.huangjh.www.rxjava2learning.api.RetrofitProvider;
 
 public class ZipActivity extends AppCompatActivity {
 
@@ -131,7 +130,7 @@ public class ZipActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final Api api = RetrofitProvider.get().create(Api.class);
+//        final Api api = RetrofitProvider.get().create(Api.class);
         //zip操作符， 组合操作结果在发送
         /*Observable<UserBaseInfoResponse> observable1 = api.getUserBaseInfo(new UserBaseInfoRequest())
                 .subscribeOn(Schedulers.io());
@@ -154,6 +153,28 @@ public class ZipActivity extends AppCompatActivity {
                     }
                 });
 */
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                for (int i = 0; ; i++) {
+                    emitter.onNext(i);    //无线循环发送事件
+                    Thread.sleep(1);
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .sample(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.d(TAG, "value: " + integer);
+                    }
+                });
     }
 }
