@@ -21,6 +21,7 @@
         <activity android:name=".ObjectChangeActivity" />
         <activity android:name=".ZipActivity" />
         <activity android:name=".FlowableActivity" />
+        <activity android:name=".BackPressureActivity"/>
     </application>
 
 </manifest>
