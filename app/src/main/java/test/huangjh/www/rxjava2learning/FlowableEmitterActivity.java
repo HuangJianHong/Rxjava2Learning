@@ -16,7 +16,12 @@ import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
+import test.huangjh.www.rxjava2learning.api.Api;
+import test.huangjh.www.rxjava2learning.api.RetrofitProvider;
 
 public class FlowableEmitterActivity extends AppCompatActivity {
 
@@ -25,6 +30,8 @@ public class FlowableEmitterActivity extends AppCompatActivity {
 
     @BindView(R.id.tvEmitter)
     TextView tvEmitter;
+    @BindView(R.id.tv250)
+    TextView tv250;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,7 @@ public class FlowableEmitterActivity extends AppCompatActivity {
 
 //        demo1();
 //        demo2();
-        demo4();
+//        demo4();
 
         tvEmitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +51,8 @@ public class FlowableEmitterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        RetrofitDemo();
     }
 
     //同步线程的 上游request处理
@@ -180,6 +189,27 @@ public class FlowableEmitterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+
+    //豆瓣电影Top250
+    public  void  RetrofitDemo(){
+        Api api = RetrofitProvider.get().create(Api.class);
+        api.getTop250(0, 12)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Response<ResponseBody>>() {
+                    @Override
+                    public void accept(Response<ResponseBody> response) throws Exception {
+                        Log.d(TAG, response.body().toString());
+                        tv250.setText(response.body().toString());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, throwable.getMessage());
                     }
                 });
     }
