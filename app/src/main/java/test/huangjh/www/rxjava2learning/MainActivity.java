@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.textView2, R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView6, R.id.textView7})
+    @OnClick({R.id.textView2, R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView6, R.id.textView7,R.id.textView8})
     public void onViewClick(View v) {
         switch (v.getId()) {
             case R.id.textView2:
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, BackPressureActivity.class));
                 break;
             case R.id.textView8:
-
+                startActivity(new Intent(this, FlowableEmitterActivity.class));
                 break;
         }
 
