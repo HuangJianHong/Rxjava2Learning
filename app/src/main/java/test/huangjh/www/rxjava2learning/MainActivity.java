@@ -10,23 +10,25 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity {
 
 
     @BindView(R.id.textView2)
     TextView tv2;
+    private Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        bind = ButterKnife.bind(this);
 
 
     }
 
-    @OnClick({R.id.textView2, R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView6, R.id.textView7,R.id.textView8})
+    @OnClick({R.id.textView2, R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9})
     public void onViewClick(View v) {
         switch (v.getId()) {
             case R.id.textView2:
@@ -51,8 +53,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.textView8:
                 startActivity(new Intent(this, FlowableEmitterActivity.class));
                 break;
+            case R.id.textView9:
+                startActivity(new Intent(this, TestActivity.class));
+                break;
         }
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
+    }
 }
